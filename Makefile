@@ -18,7 +18,7 @@ pes: $(OBJS)
 test_objects: test_objects.o object.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-test_tree: test_tree.o object.o tree.o
+test_tree: test_tree.o object.o tree.o index.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 # ─── Convenience targets ────────────────────────────────────────────────────
@@ -43,3 +43,5 @@ test-unit: test_objects test_tree
 test-integration: pes
 	@echo "=== Running integration tests ==="
 	bash test_sequence.sh
+index.o: index.c
+	gcc -Wall -Wextra -O2 -c index.c -o index.o
